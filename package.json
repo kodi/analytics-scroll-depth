@@ -1,0 +1,26 @@
+{
+  "name": "analytics-scroll-depth",
+  "version": "0.0.1",
+  "description": "@TODO",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickmickley/analytics-scroll-depth.git"
+  },
+  "keywords": [
+    "analytics",
+    "scroll",
+    "depth",
+    "dataLayer",
+    "fold"
+  ],
+  "author": "Nick Mickley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nickmickley/analytics-scroll-depth/issues"
+  },
+  "homepage": "https://github.com/nickmickley/analytics-scroll-depth#readme"
+}
