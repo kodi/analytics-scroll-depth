@@ -41,11 +41,11 @@ var index = function () {
     pixelDepthInterval: 500,
     elements: [], // @TODO
     dataLayer: window.dataLayer, // @TODO set up nonDataLayer tracking
-    eventName: 'ScrollEvent',
+    eventName: 'CustomEvent',
     eventCategory: 'Scroll Depth',
-    eventAction: 'Scroll',
-    percentageDepthEventLabel: 'Percentage Depth',
-    pixelDepthEventLabel: 'Pixel Depth',
+    percentageDepthAction: 'Percentage Depth',
+    pixelDepthAction: 'Pixel Depth',
+    elementAction: 'Element',
     nonInteraction: true }, settings);
 
   var greatestScrollTop = 0;
@@ -58,9 +58,9 @@ var index = function () {
         settings.dataLayer.push({
           event: settings.eventName,
           eventCategory: settings.eventCategory,
-          eventAction: settings.eventAction,
-          eventLabel: settings.percentageDepthEventLabel,
-          eventValue: point,
+          eventAction: settings.percentageDepthAction,
+          eventLabel: point,
+          eventValue: null,
           nonInteraction: settings.nonInteraction
         });
       }
@@ -74,9 +74,9 @@ var index = function () {
       settings.dataLayer.push({
         event: settings.eventName,
         eventCategory: settings.eventCategory,
-        eventAction: settings.eventAction,
-        eventLabel: settings.pixelDepthIntervalEventLabel,
-        eventValue: greatestScrollTop + settings.pixelDepthInterval,
+        eventAction: settings.pixelDepthAction,
+        eventLabel: greatestScrollTop + settings.pixelDepthInterval,
+        eventValue: null,
         nonInteraction: settings.nonInteraction
       });
     }
@@ -89,7 +89,7 @@ var index = function () {
         settings.dataLayer.push({
           event: settings.eventName,
           eventCategory: settings.eventCategory,
-          eventAction: settings.eventAction,
+          eventAction: settings.elementAction,
           eventLabel: element,
           eventValue: null,
           nonInteraction: settings.nonInteraction
