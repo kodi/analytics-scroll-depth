@@ -1,0 +1,74 @@
+{
+  "extends": "airbnb-base",
+  "plugins": [
+    "import",
+    "compat",
+    "html"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "Vue": true,
+    "VueResource": true,
+    "dataLayer": true,
+    "__": true,
+    "eventHub": true
+  },
+  "settings": {
+    "import/core-modules": ["Scss", "Utilities", "RogueIcons"],
+    "import/resolver": {
+      "webpack": { "config": "roguefitness.com/frontend/webpack.base.config.js" }
+    }
+  },
+  "rules": {
+    "class-methods-use-this": "off",
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
+    "compat/compat": 2,
+    "func-names": ["error", "as-needed"],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["./roguefitness.com/frontend/**/*", "!./roguefitness.com/frontend/src/**/*"]
+    }],
+    "indent": ["error", 2, {
+      "VariableDeclarator": { "var": 2, "let": 2, "const": 3 },
+      "SwitchCase": 1
+    }],
+    "key-spacing": ["error", {
+      "align": {
+        "beforeColon": true,
+        "afterColon": true,
+        "on": "colon"
+      }
+    }],
+    "max-len": ["error", 120, {
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true
+    }],
+    "newline-before-return": ["error"],
+    "no-console": ["warn", {
+      "allow": ["warn", "error"]
+    }],
+    "no-multi-spaces": ["off", {
+      "exceptions": {
+        "VariableDeclarator": true,
+        "ImportDeclaration": true,
+        "Property": true
+      }
+    }],
+    "no-new": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "semi": ["error", "never"]
+  }
+}

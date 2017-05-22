@@ -4,6 +4,8 @@
   "description": "@TODO",
   "main": "index.js",
   "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
     "test": "npm test"
   },
   "repository": {
@@ -22,5 +24,18 @@
   "bugs": {
     "url": "https://github.com/nickmickley/analytics-scroll-depth/issues"
   },
-  "homepage": "https://github.com/nickmickley/analytics-scroll-depth#readme"
+  "homepage": "https://github.com/nickmickley/analytics-scroll-depth#readme",
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-latest": "^6.24.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.1.0",
+    "eslint-plugin-compat": "^1.0.2",
+    "eslint-plugin-html": "^2.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "rollup": "^0.41.6",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-watch": "^3.2.2"
+  }
 }
