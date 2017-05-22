@@ -13,7 +13,7 @@ export default function (settings = {}) {
     eventCategory         : 'Scroll Depth',
     percentageDepthAction : 'Percentage Depth',
     pixelDepthAction      : 'Pixel Depth',
-    elementAction         : 'Element',
+    elementAction         : 'Element Depth',
     nonInteraction        : true, // @TODO
   }, settings)
 
