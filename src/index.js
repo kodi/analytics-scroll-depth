@@ -51,6 +51,18 @@ export default function (settings = {}) {
     }
   }
 
+  function formatElementLabel(element) {
+    let label = element.localName
+    if (element.id) {
+      label += `#${element.id}`
+    }
+    if (element.className) {
+      label += `.${element.className.replace(/ /g, '.')}`
+    }
+
+    return label
+  }
+
   function elements() {
     settings.elements.forEach((element, index) => {
       if (
@@ -62,7 +74,7 @@ export default function (settings = {}) {
           event          : settings.eventName,
           eventCategory  : settings.eventCategory,
           eventAction    : settings.elementAction,
-          eventLabel     : element,
+          eventLabel     : formatElementLabel(element),
           eventValue     : null,
           nonInteraction : settings.nonInteraction,
         })
