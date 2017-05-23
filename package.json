@@ -1,6 +1,6 @@
 {
   "name": "analytics-scroll-depth",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "@TODO",
   "main": "dist/analytics-scroll-depth.common.js",
   "mobule": "dist/analytics-scroll-depth.esm.js",
