@@ -1,5 +1,5 @@
 /*!
- * Analytics Scroll Depth v0.0.1
+ * Analytics Scroll Depth v0.1.1
  * (c) 2017 Nick Mickley
  * Released under the MIT License.
  */
@@ -40,7 +40,7 @@ var index = function () {
     scrollElement: document.documentElement,
     percentages: [0.25, 0.5, 0.75, 0.9, 0.95, 0.99],
     pixelDepthInterval: 500,
-    elements: [], // @TODO
+    elements: [],
     dataLayer: window.dataLayer, // @TODO set up nonDataLayer tracking
     eventName: 'CustomEvent',
     eventCategory: 'Scroll Depth',
@@ -51,6 +51,10 @@ var index = function () {
 
   var greatestScrollTop = 0;
 
+  /**
+   * Push an event when the user has scrolled past each percentage in settings.percentages
+   * @return {void}
+   */
   function percentageDepth() {
     var scrollRatio = settings.scrollElement.scrollTop / (settings.scrollElement.scrollHeight - settings.scrollElement.clientHeight); // eslint-disable-line max-len
     settings.percentages.forEach(function (point, index) {
@@ -68,6 +72,10 @@ var index = function () {
     });
   }
 
+  /**
+   * Push an event when the user has scrolled past each pixelDepthInterval
+   * @return {void}
+   */
   function pixelDepth() {
     var scrollTop = settings.scrollElement.scrollTop;
     while (scrollTop >= greatestScrollTop + settings.pixelDepthInterval) {
@@ -83,6 +91,11 @@ var index = function () {
     }
   }
 
+  /**
+   * Return the event label
+   * @param  {node} element
+   * @return {string}
+   */
   function formatElementLabel(element) {
     var label = element.localName;
     if (element.id) {
@@ -95,9 +108,13 @@ var index = function () {
     return label;
   }
 
+  /**
+   * Push an event when the given element scrolls into view, if it exists
+   * @return {void}
+   */
   function elements() {
     settings.elements.forEach(function (element, index) {
-      if (element.offsetTop + element.clientHeight < settings.scrollElement.clientHeight + settings.scrollElement.scrollTop) {
+      if (element && element.offsetTop + element.clientHeight < settings.scrollElement.clientHeight + settings.scrollElement.scrollTop) {
         settings.elements.splice(index, 1);
         settings.dataLayer.push({
           event: settings.eventName,
@@ -111,6 +128,10 @@ var index = function () {
     });
   }
 
+  /**
+   * Scroll watcher
+   * @return {void}
+   */
   function onScroll() {
     if (settings.percentages) {
       percentageDepth();
@@ -123,6 +144,10 @@ var index = function () {
     }
   }
 
+  /**
+   * Set scrollw atcher
+   * @return {void}
+   */
   function watch() {
     window.addEventListener('scroll', throttle(onScroll, settings.throttle), true);
   }

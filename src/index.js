@@ -7,7 +7,7 @@ export default function (settings = {}) {
     scrollElement         : document.documentElement,
     percentages           : [0.25, 0.5, 0.75, 0.9, 0.95, 0.99],
     pixelDepthInterval    : 500,
-    elements              : [], // @TODO
+    elements              : [],
     dataLayer             : window.dataLayer, // @TODO set up nonDataLayer tracking
     eventName             : 'CustomEvent',
     eventCategory         : 'Scroll Depth',
@@ -19,6 +19,10 @@ export default function (settings = {}) {
 
   let greatestScrollTop = 0
 
+  /**
+   * Push an event when the user has scrolled past each percentage in settings.percentages
+   * @return {void}
+   */
   function percentageDepth() {
     const scrollRatio = settings.scrollElement.scrollTop / (settings.scrollElement.scrollHeight - settings.scrollElement.clientHeight) // eslint-disable-line max-len
     settings.percentages.forEach((point, index) => {
@@ -36,6 +40,10 @@ export default function (settings = {}) {
     })
   }
 
+  /**
+   * Push an event when the user has scrolled past each pixelDepthInterval
+   * @return {void}
+   */
   function pixelDepth() {
     const scrollTop = settings.scrollElement.scrollTop
     while (scrollTop >= greatestScrollTop + settings.pixelDepthInterval) {
@@ -51,6 +59,11 @@ export default function (settings = {}) {
     }
   }
 
+  /**
+   * Return the event label
+   * @param  {node} element
+   * @return {string}
+   */
   function formatElementLabel(element) {
     let label = element.localName
     if (element.id) {
@@ -63,9 +76,14 @@ export default function (settings = {}) {
     return label
   }
 
+  /**
+   * Push an event when the given element scrolls into view, if it exists
+   * @return {void}
+   */
   function elements() {
     settings.elements.forEach((element, index) => {
       if (
+        element &&
         element.offsetTop + element.clientHeight <
         settings.scrollElement.clientHeight + settings.scrollElement.scrollTop
       ) {
@@ -82,6 +100,10 @@ export default function (settings = {}) {
     })
   }
 
+  /**
+   * Scroll watcher
+   * @return {void}
+   */
   function onScroll() {
     if (settings.percentages) {
       percentageDepth()
@@ -94,6 +116,10 @@ export default function (settings = {}) {
     }
   }
 
+  /**
+   * Set scrollw atcher
+   * @return {void}
+   */
   function watch() {
     window.addEventListener('scroll', throttle(onScroll, settings.throttle), true)
   }

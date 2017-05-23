@@ -2,7 +2,7 @@
   "name": "analytics-scroll-depth",
   "version": "0.1.1",
   "description": "@TODO",
-  "main": "dist/analytics-scroll-depth.common.js",
+  "main": "dist/analytics-scroll-depth.umd.js",
   "mobule": "dist/analytics-scroll-depth.esm.js",
   "unpkg": "dist/analytics-scroll-depth.js",
   "files": [
@@ -10,10 +10,12 @@
     "dist"
   ],
   "scripts": {
-    "dev:cjs": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:cjs",
-    "dev:esm": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:esm",
-    "dev:iife": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:iife",
-    "dev:umd": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:umd",
+    "dev": "npm run dev:cjs && npm run dev:esm && npm run dev:iife && npm run dev:iife-min && npm run dev:umd",
+    "dev:cjs": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:cjs &",
+    "dev:esm": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:esm &",
+    "dev:iife": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:iife &",
+    "dev:iife-min": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:iife-min &",
+    "dev:umd": "./node_modules/.bin/rollup -w -c build/config.js --environment TARGET:umd &",
     "build": "npm run build:cjs && npm run build:esm && npm run build:iife && npm run build:iife-min && npm run build:umd",
     "build:cjs": "./node_modules/.bin/rollup -c build/config.js --environment TARGET:cjs",
     "build:esm": "./node_modules/.bin/rollup -c build/config.js --environment TARGET:esm",
