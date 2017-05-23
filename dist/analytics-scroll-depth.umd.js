@@ -43,15 +43,34 @@
       percentages           : [0.25, 0.5, 0.75, 0.9, 0.95, 0.99],
       pixelDepthInterval    : 500,
       elements              : [],
-      dataLayer             : window.dataLayer, // @TODO set up nonDataLayer tracking
+      dataLayer             : window.dataLayer,
+      trackerName           : '',
       eventName             : 'CustomEvent',
       eventCategory         : 'Scroll Depth',
       percentageDepthAction : 'Percentage Depth',
       pixelDepthAction      : 'Pixel Depth',
       elementAction         : 'Element Depth',
-      nonInteraction        : true }, settings)
+      nonInteraction        : true,
+    }, settings)
 
     let greatestScrollTop = 0
+
+    if (settings.trackerName) {
+      settings.trackerName += '.'
+    }
+
+  /**
+   * Send event dataLayer and/or analytics object
+   * @param  {object} o Object to send to dataLayer
+   * @return {void}
+   */
+    function send(o) {
+      if (settings.dataLayer) {
+        settings.dataLayer.push(o)
+      } else if (window[window.GoogleAnalyticsObject]) {
+        window[window.GoogleAnalyticsObject](`${settings.trackerName}send`, 'event', o.eventCategory, o.eventAction, o.eventLabel, o.eventValue, { nonInteraction: o.nonInteraction })
+      }
+    }
 
   /**
    * Push an event when the user has scrolled past each percentage in settings.percentages
@@ -62,7 +81,7 @@
       settings.percentages.forEach((point, index) => {
         if (scrollRatio >= point) {
           settings.percentages.splice(index, 1)
-          settings.dataLayer.push({
+          send({
             event          : settings.eventName,
             eventCategory  : settings.eventCategory,
             eventAction    : settings.percentageDepthAction,
@@ -82,7 +101,7 @@
       const scrollTop = settings.scrollElement.scrollTop
       while (scrollTop >= greatestScrollTop + settings.pixelDepthInterval) {
         greatestScrollTop += settings.pixelDepthInterval
-        settings.dataLayer.push({
+        send({
           event          : settings.eventName,
           eventCategory  : settings.eventCategory,
           eventAction    : settings.pixelDepthAction,
@@ -118,7 +137,7 @@
       settings.elements.forEach((element, index) => {
         if (element && element.offsetTop + element.clientHeight < settings.scrollElement.clientHeight + settings.scrollElement.scrollTop) {
           settings.elements.splice(index, 1)
-          settings.dataLayer.push({
+          send({
             event          : settings.eventName,
             eventCategory  : settings.eventCategory,
             eventAction    : settings.elementAction,
