@@ -101,7 +101,7 @@ export default function (settings = {}) {
   function elements() {
     settings.elements.forEach((element, index) => {
       if (
-        element &&
+        element && element.offsetTop && element.clientHeight &&
         element.offsetTop + element.clientHeight <
         settings.scrollElement.clientHeight + settings.scrollElement.scrollTop
       ) {

@@ -1,5 +1,5 @@
 /*!
- * Analytics Scroll Depth v0.1.1
+ * Analytics Scroll Depth v0.1.2
  * (c) 2017 Nick Mickley
  * Released under the MIT License.
  */
@@ -132,7 +132,7 @@ var index = function () {
    */
   function elements() {
     settings.elements.forEach(function (element, index) {
-      if (element && element.offsetTop + element.clientHeight < settings.scrollElement.clientHeight + settings.scrollElement.scrollTop) {
+      if (element && element.offsetTop && element.clientHeight && element.offsetTop + element.clientHeight < settings.scrollElement.clientHeight + settings.scrollElement.scrollTop) {
         settings.elements.splice(index, 1);
         send({
           event: settings.eventName,
