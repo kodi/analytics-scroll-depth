@@ -1,26 +1,13 @@
 {
   "extends": "airbnb-base",
-  "plugins": [
-    "import",
-    "compat",
-    "html"
-  ],
+  "plugins": [],
   "env": {
-    "browser": true,
-    "node": true
+    "browser": true
   },
-  "globals": {
-    "Vue": true,
-    "VueResource": true,
-    "dataLayer": true,
-    "__": true,
-    "eventHub": true
-  },
+  "globals": {},
   "settings": {
     "import/core-modules": ["Scss", "Utilities", "RogueIcons"],
-    "import/resolver": {
-      "webpack": { "config": "roguefitness.com/frontend/webpack.base.config.js" }
-    }
+    "import/resolver": {}
   },
   "rules": {
     "class-methods-use-this": "off",
@@ -31,7 +18,6 @@
       "exports": "always-multiline",
       "functions": "never"
     }],
-    "compat/compat": 2,
     "func-names": ["error", "as-needed"],
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["./roguefitness.com/frontend/**/*", "!./roguefitness.com/frontend/src/**/*"]
@@ -56,9 +42,7 @@
       "ignoreRegExpLiterals": true
     }],
     "newline-before-return": ["error"],
-    "no-console": ["warn", {
-      "allow": ["warn", "error"]
-    }],
+    "no-console": ["off"],
     "no-multi-spaces": ["off", {
       "exceptions": {
         "VariableDeclarator": true,
