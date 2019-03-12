@@ -10,6 +10,7 @@ export default function (settings = {}) {
     elements              : [],
     dataLayer             : window.dataLayer,
     trackerName           : '',
+    scrollCallback        : null,
     eventName             : 'CustomEvent',
     eventCategory         : 'Scroll Depth',
     percentageDepthAction : 'Percentage Depth',
@@ -32,6 +33,8 @@ export default function (settings = {}) {
   function send(o) {
     if (settings.dataLayer) {
       settings.dataLayer.push(o)
+    } else if (settings.scrollCallback !== null) {
+      settings.scrollCallback(o)
     } else if (window[window.GoogleAnalyticsObject]) {
       window[window.GoogleAnalyticsObject](`${settings.trackerName}send`, 'event', o.eventCategory, o.eventAction, o.eventLabel, o.eventValue, { nonInteraction: o.nonInteraction })
     }
@@ -79,7 +82,7 @@ export default function (settings = {}) {
 
   /**
    * Return the event label
-   * @param  {node} element
+   * @param  {HTMLElement} element
    * @return {string}
    */
   function formatElementLabel(element) {
